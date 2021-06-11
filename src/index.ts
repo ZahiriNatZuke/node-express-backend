@@ -24,4 +24,4 @@ mongoose.connection.openUri(
     }
 );
 
-app.listen(PORT, () => console.log(`⚡️ [express]: Server is running at: http://localhost:${PORT}/api`));
+app.listen(PORT, () => console.log(`⚡️[express]: Server is running at: http://localhost:${PORT}/api`));
