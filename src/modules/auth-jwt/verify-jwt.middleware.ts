@@ -10,7 +10,7 @@ export const verifyJwtMiddleware = (req: any, res: any, next: NextFunction) => {
         const bearerToken = bearer[1];
 
         jwt.verify(bearerToken, process.env.JWT_SECRET, (error: any, userDecoded: any) => {
-            if (error) return res.status(401).json({status: 'unauthorized', error: error});
+            if (error) return res.status(401).json({status: 'unauthorized', error});
 
             req.body.userDecoded = userDecoded;
 

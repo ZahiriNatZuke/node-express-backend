@@ -28,7 +28,6 @@ UserRoutes.get('/:id', (req, res) => {
                 message: `User with id: ${id} does not exist`,
             });
 
-        user.password = ':)';
         res.status(200).json({status: 'success', data: user});
     });
 });
@@ -39,11 +38,11 @@ UserRoutes.post('/', verifyJwtMiddleware, (req, res) => {
 
     const newUser = new User({
         name: body.name,
-        email: body.email,
+        user: body.user,
         password: bcrypt.hashSync(body.password, bcrypt.genSaltSync(10)),
         image: body.image,
         role: body.role
-    })
+    });
 
     newUser.save((error: any, userSaved) => {
         if (error) return res.status(422).json({status: 'failed', errors: error.errors});
@@ -68,12 +67,12 @@ UserRoutes.put('/:id', verifyJwtMiddleware, (req, res) => {
 
         user.name = body.name;
         user.email = body.email;
+        user.image = body.image;
         user.role = body.role;
 
         user.save((errorSaved: any, userSaved: any) => {
             if (errorSaved) return res.status(400).json({status: 'failed', errors: errorSaved.errors});
 
-            userSaved.password = ':)';
             res.status(200).json({status: 'success', data: userSaved});
         });
     });
@@ -93,7 +92,6 @@ UserRoutes.delete('/:id', verifyJwtMiddleware, (req, res) => {
                 message: `User with id: ${id} does not exist`,
             });
 
-        userDeleted.password = ':)';
-        res.status(200).json({status: 'success', data: userDeleted});
+        res.status(200).json({status: 'success', msg: 'User has been deleted successfully'});
     });
 });

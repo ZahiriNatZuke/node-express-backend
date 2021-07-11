@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import bodyParser from "body-parser";
+import bodyParser from 'body-parser';
 import {AppRoutes} from './app.routes';
 import {morganMiddleware} from './libs/morgan';
 import 'dotenv/config';
@@ -16,11 +16,11 @@ app.use('/api', AppRoutes);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 mongoose.connection.openUri(
-    'mongodb://localhost:27017/hospital_db',
+    process.env.MONGODB_URL,
     {useNewUrlParser: true, useUnifiedTopology: true},
     (error) => {
         if (error) throw error;
-        console.log('✨ [mongodb]: MongoDB is online, connected to: \x1b[42m%s\x1b[0m', 'hospital_db');
+        console.log('✨ [mongodb]: MongoDB is online, connected to: \x1b[42m%s\x1b[0m', 'matematica-segundo');
     }
 );
 
